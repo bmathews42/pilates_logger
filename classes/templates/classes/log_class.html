@@ -1,0 +1,114 @@
+{% extends "classes/base.html" %}
+
+{% block title %}Log Pilates Class{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>Log Pilates Class</h2>
+
+    <form method="POST" id="pilates-form">
+        {% csrf_token %}
+
+        <!-- Date -->
+        <div class="mb-3 d-flex align-items-center">
+            {{ form.date.label_tag }} 
+            {{ form.date }}
+            <button type="button" id="today-btn" class="btn btn-sm btn-outline-secondary ms-2">
+                Today
+            </button>
+        </div>
+
+        <!-- Instructor dropdown -->
+        <div class="mb-3">
+            {{ form.instructor.label_tag }} {{ form.instructor }}
+        </div>
+
+        <!-- Hidden new instructor field -->
+        <div class="mb-3" id="new-instructor-div" style="display:none;">
+            <label for="id_new_instructor">New Instructor:</label>
+            <input type="text" name="new_instructor" id="id_new_instructor" class="form-control">
+        </div>
+
+        <!-- Toggle button -->
+        <button type="button" id="show-instructor-btn" class="btn btn-secondary mb-3">
+            + Add New Instructor
+        </button>
+
+        <!-- Difficulty fields -->
+        <div class="mb-3">
+            {{ form.arms.label_tag }} {{ form.arms }}
+        </div>
+        <div class="mb-3">
+            {{ form.legs.label_tag }} {{ form.legs }}
+        </div>
+        <div class="mb-3">
+            {{ form.abs.label_tag }} {{ form.abs }}
+        </div>
+
+        <!-- Notes -->
+         <div class="mb-3">
+            {{ form.notes.label_tag }}
+         </div>
+         </div>
+
+        <div class="mb-3">
+            {{ form.notes }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Class</button>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById("show-instructor-btn");
+    const newDiv = document.getElementById("new-instructor-div");
+    const newInput = document.getElementById("id_new_instructor");
+    const instructorSelect = document.getElementById("id_instructor");
+    const form = document.getElementById("pilates-form");
+
+    // Toggle new instructor field
+    btn.addEventListener("click", () => {
+        newDiv.style.display = "block";   // Show the field
+        btn.style.display = "none";       // Hide the button
+        newInput.focus();
+    });
+
+    // Form validation
+    form.addEventListener("submit", function(e) {
+        const selectedInstructor = instructorSelect.value;
+        const newInstructor = newInput.value.trim();
+
+        if (selectedInstructor && newInstructor) {
+            e.preventDefault();
+            alert("Please either select an existing instructor OR add a new one, not both.");
+        }
+
+        if (!selectedInstructor && !newInstructor) {
+            e.preventDefault();
+            alert("Please select an instructor or add a new one.");
+        }
+    });
+
+    // Fill date with today
+    const todayBtn = document.getElementById("today-btn");
+    const dateInput = document.getElementById("id_date");
+
+    todayBtn.addEventListener("click", () => {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1;
+        let dd = today.getDate();
+
+        if (mm < 10) mm = "0" + mm;
+        if (dd < 10) dd = "0" + dd;
+
+        dateInput.value = `${yyyy}-${mm}-${dd}`; // Format: YYYY-MM-DD
+    });
+});
+</script>
+{% endblock %}

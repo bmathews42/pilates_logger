@@ -1,0 +1,30 @@
+{% extends "classes/base.html" %}
+
+{% block title %}Class History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>Class History</h2>
+    
+    {% if classes %}
+        {% for c in classes %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <b>{{ c.date }}</b><br>
+                    Instructor: {{ c.instructor }}<br>
+                    Arms: {{ c.arms }}  
+                    Legs: {{ c.legs }}  
+                    Abs: {{ c.abs }}
+                    {% if c.notes %}
+                        <p>{{ c.notes }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No classes logged yet.</p>
+    {% endif %}
+    
+</div>
+{% endblock %}

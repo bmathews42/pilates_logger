@@ -1,0 +1,22 @@
+{% extends "classes/base.html" %}
+
+{% block title %}Stats{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>Stats</h2>
+    
+    <p><b>Total Classes:</b> {{ total }}</p>
+    
+    <hr>
+    
+    <h5>Average Difficulty</h5>
+    <ul>
+        <li>Arms: {{ stats.arms_avg|floatformat:1 }}</li>
+        <li>Legs: {{ stats.legs_avg|floatformat:1 }}</li>
+        <li>Abs: {{ stats.abs_avg|floatformat:1 }}</li>
+    </ul>
+    
+</div>
+{% endblock %}
