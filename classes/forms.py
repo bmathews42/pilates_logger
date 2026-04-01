@@ -17,5 +17,7 @@ class PilatesClassForm(forms.ModelForm):
             "arms",
             "legs",
             "abs",
+            "obliques",
+            "calories",
             "notes",
         ]
