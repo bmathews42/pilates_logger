@@ -45,6 +45,7 @@ def stats(request):
         arms_avg=Avg("arms"),
         legs_avg=Avg("legs"),
         abs_avg=Avg("abs"),
+        obliques_avg=Avg("obliques")
     )
 
     total = PilatesClass.objects.count()

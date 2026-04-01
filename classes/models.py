@@ -29,12 +29,12 @@ class PilatesClass(models.Model):
         blank=True
     )
 
-    arms = models.IntegerField(choices=DIFFICULTY)
-    legs = models.IntegerField(choices=DIFFICULTY)
-    abs = models.IntegerField(choices=DIFFICULTY)
-    obliques = models.IntegerField(choices=DIFFICULTY)
+    arms = models.IntegerField(choices=DIFFICULTY, default=0)
+    legs = models.IntegerField(choices=DIFFICULTY, default=0)
+    abs = models.IntegerField(choices=DIFFICULTY, default=0)
+    obliques = models.IntegerField(choices=DIFFICULTY, default=0)
 
-    calories = models.IntegerField()
+    calories = models.IntegerField(default=0)
 
     notes = models.TextField(blank=True)
 
