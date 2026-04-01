@@ -79,7 +79,6 @@ grpc-interceptor==0.15.4
 grpcio==1.76.0
 grpcio-status==1.76.0
 gunicorn==23.0.0
-gurobipy==12.0.3
 h11==0.14.0
 httpcore==1.0.5
 httplib2==0.31.0
